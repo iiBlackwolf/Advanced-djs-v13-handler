@@ -1,15 +1,11 @@
-const Discord = require('discord.js')
-const config = require('../config.json')
-const { MessageActionRow, MessageButton, Collection } = require('discord.js');
-
 module.exports = {
     name: 'interactionCreate',
     async execute(client, interaction) {
         if (!interaction.isCommand()) return;
-        const slash = client.commands.get(interaction.commandName);
+        const slash = client.slashCommands.get(interaction.commandName);
     
         if(!slash) {
-          return;
+          return console.log(interaction.commandName + " Can't find this slash command!")
         } else if(interaction.user.bot) {
           return;
         } else {
@@ -33,7 +29,7 @@ module.exports = {
        if (interaction.guild) {
        const sclientPerms = interaction.channel.permissionsFor(interaction.guild.me);
        if (!sclientPerms || !sclientPerms.has(slash.clientpermissions)) {
-           return interaction.reply({ content: `Missing permissions!`, ephemeral: true });
+           return interaction.channel.send({ content: `Missing permissions!`, ephemeral: true });
        }
       }
     }  
@@ -54,7 +50,7 @@ module.exports = {
       };
       if (interaction.guild){
         if (!interaction.channel.permissionsFor(interaction.guild.me).has('READ_MESSAGE_HISTORY')){
-          return interaction.reply({ content: '"Missing Access", the bot is missing the \`READ_MESSAGE_HISTORY\` permission please enable it!'})
+          return interaction.channel.send({ content: '"Missing Access", the bot is missing the \`READ_MESSAGE_HISTORY\` permission please enable it!'})
         } else {
           // Do nothing..
         };
@@ -62,7 +58,7 @@ module.exports = {
             await slash.execute(client, interaction);
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true }).catch(() => interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true }));
+            await interaction.channel.send({ content: 'There was an error while executing this command!', ephemeral: true }).catch(() => interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true }));
         }
     }
 }
