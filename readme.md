@@ -7,7 +7,7 @@ To setup the project first in your terminal type the following command to instal
 npm install
 ```
 
-## Make a file named **.env**
+## Make a file named **.env** if it's not their
 Add your *client token* in the .env file you created
 > example:
 TOKEN=BOT'S_TOKEN
