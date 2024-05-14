@@ -1,0 +1,14 @@
+{
+  "name": "custom-handlers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "WOLF#8258",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.12.0"
+  }
+}
